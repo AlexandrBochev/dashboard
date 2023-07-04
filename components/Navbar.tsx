@@ -14,26 +14,26 @@ import React, { useState } from 'react'
 
 const Navbar = () => {
 
-  const [key, setKey] = useState("#9197B3")
-  const [product, setProduct] = useState("#9197B3")
-  const [customers, setCustomers] = useState("#9197B3")
-  const [income, setIncome] = useState("#9197B3")
-  const [promote, setPromote] = useState("#9197B3")
-  const [help, setHelp] = useState("#9197B3")
+  const [btnLink, setBtnLink] = useState('/')
+
   const [navigation, setNavigation] = useState("w-[250px] xl:w-[306px] h-full absolute flex flex-col justify-between translate-x-[-250px] md:translate-x-[0px] md:static bg-white shadow pt-36 pb-20 xl:px-7 px-4 transition duration-1000 z-40")
   const [burgerClass, setBurgerClass] = useState("md:hidden block absolute top-[36px] right-[28px] z-20")
   const [crossClass, setCrossClass] = useState("md:hidden hidden absolute top-[35px] right-[30px] z-20")
 
-  const burgerHendle = (e: any) => {
+  const btnActive = "flex items-center justify-between mb-[18px] xl:w-[250px] w-[218px] h-[46px] hover:bg-indigo-100 text-slate-400 rounded-lg p-[11px] transition duration-200"
+  const btnInactive = "flex items-center justify-between mb-[18px] xl:w-[250px] w-[218px] h-[46px] bg-indigo-600 text-white rounded-lg p-[11px] transition duration-200"
+
+  const burgerHendle = () => {
     setBurgerClass("md:hidden hidden absolute top-[36px] right-[28px] z-20")
     setCrossClass("md:hidden block absolute top-[35px] right-[30px] z-20")
     setNavigation("w-[250px] xl:w-[306px] h-full absolute flex flex-col justify-between translate-x-[0px] md:translate-x-[0px] md:static bg-white shadow pt-36 pb-20 xl:px-7 px-4 transition duration-1000 z-40")
   }
 
-  const crossHendle = (e: any) => {
+  const crossHendle = (h: any) => {
     setBurgerClass("md:hidden block absolute top-[36px] right-[28px] z-20")
     setCrossClass("md:hidden hidden absolute top-[35px] right-[30px] z-20")
     setNavigation("w-[250px] xl:w-[306px] h-full absolute flex flex-col justify-between translate-x-[-250px] md:translate-x-[0px] md:static bg-white shadow pt-36 pb-20 xl:px-7 px-4 transition duration-1000 z-40")
+    setBtnLink(h)
   }
 
   return (
@@ -45,64 +45,73 @@ const Navbar = () => {
       <nav className={navigation}>
         <div>
           <Link
-            onFocus={() => setKey("#ffffff")} onBlur={() => setKey("#9197B3")} onClick={crossHendle}
-            className="flex mb-[18px] xl:w-[250px] w-[218px] h-[46px] hover:bg-indigo-100 hover:scale-[102%] active:scale-[98%] focus:bg-indigo-600 focus:text-white text-slate-400 rounded-lg p-[11px] transition duration-200" href="/">
-            <KeyIcon fill={key} />
-            <p className="text-[14px] font-medium ml-[14px] mt-[2px]">Dashboard</p>
+            onClick={() => crossHendle("/")}
+            className={ btnLink !== "/" ? btnActive : btnInactive }
+            href="/">
+            <div className="flex">
+              <KeyIcon fill={ btnLink !== "/" ? "#9197B3" : "#ffffff" } />
+              <p className="text-[14px] font-medium ml-[14px] mt-[2px]">Dashboard</p>
+            </div>
           </Link>
           <Link
-            onFocus={() => setProduct("#ffffff")} onBlur={() => setProduct("#9197B3")} onClick={crossHendle}
-            className="flex items-center justify-between mb-[18px] xl:w-[250px] w-[218px] h-[46px] hover:bg-indigo-100 hover:scale-[102%] active:scale-[98%] focus:bg-indigo-600 focus:text-white text-slate-400 rounded-lg p-[11px] transition duration-200" href="/product">
+            onClick={() => crossHendle("/product")}
+            className={ btnLink !== "/product" ? btnActive : btnInactive }
+            href="/product">
             <div className='flex'>
-              <ProductIcon fill={product} />
+              <ProductIcon fill={ btnLink !== "/product" ? "#9197B3" : "#ffffff" } />
               <p className="text-[14px] font-medium ml-[14px] mt-[2px]">Product</p>
             </div>
             <div>
-              <ArrowIcon fill={product} />
+              <ArrowIcon fill={ btnLink !== "/product" ? "#9197B3" : "#ffffff" } />
             </div>
           </Link>
           <Link
-            onFocus={() => setCustomers("#ffffff")} onBlur={() => setCustomers("#9197B3")} onClick={crossHendle}
-            className="flex items-center justify-between mb-[18px] xl:w-[250px] w-[218px] h-[46px] hover:bg-indigo-100 hover:scale-[102%] active:scale-[98%] focus:bg-indigo-600 focus:text-white text-slate-400 rounded-lg p-[11px] transition duration-200" href="/customers">
+            onClick={() => crossHendle("/customers")}
+            className={ btnLink !== "/customers" ? btnActive : btnInactive }
+            href="/customers">
             <div className='flex'>
-              <CustomersIcon fill={customers} />
+              <CustomersIcon fill={ btnLink !== "/customers" ? "#9197B3" : "#ffffff" } />
               <p className="text-[14px] font-medium ml-[14px] mt-[2px]">Customers</p>
             </div>
             <div>
-              <ArrowIcon fill={customers} />
+              <ArrowIcon fill={ btnLink !== "/customers" ? "#9197B3" : "#ffffff" } />
             </div>
           </Link>
           <Link
-            onFocus={() => setIncome("#ffffff")} onBlur={() => setIncome("#9197B3")} onClick={crossHendle}
-            className="flex items-center justify-between mb-[18px] xl:w-[250px] w-[218px] h-[46px] hover:bg-indigo-100 hover:scale-[102%] active:scale-[98%] focus:bg-indigo-600 focus:text-white text-slate-400 rounded-lg p-[11px] transition duration-200" href="/income">
+            onClick={() => crossHendle("/income")}
+            className={ btnLink !== "/income" ? btnActive : btnInactive }
+            href="/income">
             <div className='flex'>
-              <IncomeIcon fill={income} />
+              <IncomeIcon fill={ btnLink !== "/income" ? "#9197B3" : "#ffffff" } />
               <p className="text-[14px] font-medium ml-[14px] mt-[2px]">Income</p>
             </div>
             <div>
-              <ArrowIcon fill={income} />
+              <ArrowIcon fill={ btnLink !== "/income" ? "#9197B3" : "#ffffff" } />
             </div>
           </Link>
           <Link
-            onFocus={() => setPromote("#ffffff")} onBlur={() => setPromote("#9197B3")} onClick={crossHendle}
-            className="flex items-center justify-between mb-[18px] xl:w-[250px] w-[218px] h-[46px] hover:bg-indigo-100 hover:scale-[102%] active:scale-[98%] focus:bg-indigo-600 focus:text-white text-slate-400 rounded-lg p-[11px] transition duration-200" href="/promote">
+            onClick={() => crossHendle("/promote")}
+            className={ btnLink !== "/promote" ? btnActive : btnInactive }
+            href="/promote">
             <div className='flex'>
-              <PromoteIcon fill={promote} />
+              <PromoteIcon fill={ btnLink !== "/promote" ? "#9197B3" : "#ffffff" } />
               <p className="text-[14px] font-medium ml-[14px] mt-[2px]">Promote</p>
             </div>
             <div>
-              <ArrowIcon fill={promote} />
+              <ArrowIcon fill={ btnLink !== "/promote" ? "#9197B3" : "#ffffff" } />
             </div>
           </Link>
+
           <Link
-            onFocus={() => setHelp("#ffffff")} onBlur={() => setHelp("#9197B3")} onClick={crossHendle}
-            className="flex items-center justify-between mb-[18px] xl:w-[250px] w-[218px] h-[46px] hover:bg-indigo-100 hover:scale-[102%] active:scale-[98%] focus:bg-indigo-600 focus:text-white text-slate-400 rounded-lg p-[11px] transition duration-200" href="/help">
+            onClick={() => crossHendle("/help")}
+            className={ btnLink !== "/help" ? btnActive : btnInactive }
+            href="/help">
             <div className='flex'>
-              <HelpIcon fill={help} />
+              <HelpIcon fill={ btnLink !== "/help" ? "#9197B3" : "#ffffff" } />
               <p className="text-[14px] font-medium ml-[14px] mt-[2px]">Help</p>
             </div>
             <div>
-              <ArrowIcon fill={help} />
+              <ArrowIcon fill={ btnLink !== "/help" ? "#9197B3" : "#ffffff" } />
             </div>
           </Link>
         </div>
