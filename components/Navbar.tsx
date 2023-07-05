@@ -7,10 +7,11 @@ import IncomeIcon from './icons/IncomIcon'
 import ProductIcon from './icons/ProductIcon'
 import PromoteIcon from './icons/PromoteIcon'
 import ArrowIcon from './icons/ArrowIcon'
+import Logo from '../public/logo.svg'
 import cross from '../public/cross.svg'
 import burger from '../public/burger.svg'
 import evano from '../public/Evano.png'
-import React, { useState } from 'react'
+import React, { useState, useEffect, MouseEventHandler } from 'react'
 
 const Navbar = () => {
 
@@ -36,12 +37,24 @@ const Navbar = () => {
     setBtnLink(h)
   }
 
+  useEffect(() => {
+    const h = window.location.href
+    const words = h.split("/")
+    words.length <= 1 ? crossHendle("/") : crossHendle(("/" + words.pop()))
+  }, [])
+  
+
   return (
     <div>
       <div>
         <Image onClick={burgerHendle} className={burgerClass} src={burger} alt='Burger'/>
         <Image onClick={crossHendle} className={crossClass} src={cross} alt='Cross'/>
       </div>
+      <Link onClick={() => crossHendle("/")} className="absolute top-8 left-4 xl:left-7 flex items-center z-50" href="/">
+        <Image src={Logo} alt="Dashboard Logo" />
+        <p className="text-[26px] font-poppins font-semibold ml-2 mr-1 mt-[2px]">Dashboard</p>
+        <p className="text-[10px] font-medium text-zinc-500 mt-3">v.01</p>
+      </Link>
       <nav className={navigation}>
         <div>
           <Link
